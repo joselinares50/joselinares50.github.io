@@ -14,6 +14,14 @@ import { TableDemo } from './tabledemo';
 import { OverlayDemo } from './overlaydemo';
 import { TreeDemo } from './treedemo';
 import { MenuDemo } from './menudemo';
+import { Swe619 } from './swe619';
+import { Swe620 } from './swe620';
+import { Message } from './message';
+import { Grade } from './grade'
+import { Schedule } from './schedule'
+import { Timeline } from './timeline'
+
+
 
 export default [
     { path: 'button', data: { breadcrumb: 'Button' }, component: ButtonDemo },
@@ -31,5 +39,11 @@ export default [
     { path: 'overlay', data: { breadcrumb: 'Overlay' }, component: OverlayDemo },
     { path: 'tree', data: { breadcrumb: 'Tree' }, component: TreeDemo },
     { path: 'menu', data: { breadcrumb: 'Menu' }, component: MenuDemo },
+    { path: 'swe619', data: { breadcrumb: 'SWE619' }, component: Swe619 },
+    { path: 'swe620', data: { breadcrumb: 'SWE620' }, component: Swe620 },
+    { path: 'messagepage', data: { breadcrumb: 'Message' }, component: Message },
+    { path: 'grade/:id', data: { breadcrumb: 'Grade' }, component: Grade },
+    { path: 'schedule/:id', data: { breadcrumb: 'Schedule' }, component: Schedule },
+    { path: 'timelinepage/:id', data: { breadcrumb: 'Timeline' }, component: Timeline },
     { path: '**', redirectTo: '/notfound' }
 ] as Routes;

@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     selector: 'app-footer',
     template: `<div class="layout-footer">
         BrightPath LMS by
-        <a href="https://primeng.org" target="_blank" rel="noopener noreferrer" class="text-primary font-bold hover:underline">Jose Linares</a>
+        <a class="text-primary font-bold hover:underline">Jose Linares</a>
     </div>`
 })
 export class AppFooter {}
