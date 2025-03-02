@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
+import { Router } from '@angular/router';
+
 
 @Component({
     selector: 'message',
@@ -39,7 +41,8 @@ import { ToastModule } from 'primeng/toast';
                 </div>
                 <div *ngIf="autoFilteredValue.length" class="flex flex-wrap">
                     <label for="message">Message</label>
-                    <textarea pTextarea id="message" rows="4"></textarea>
+                    <textarea pTextarea id="message" rows="4" [(ngModel)]="textareaValue" (ngModelChange)="textareaChange($event)" class="{{ textareaError == true ? 'ng-invalid ng-dirty': ''}}"></textarea>
+                    <p-message *ngIf="textareaError" severity="error" variant="simple" size="small">Message cannot be empty. Provide a message in order to send.</p-message>
                 </div>
 
                 <div class="flex flex-wrap gap-2">
@@ -55,7 +58,7 @@ export class Message {
 
     msgs: ToastMessageOptions[] | null = [];
 
-    constructor(private service: MessageService) { }
+    constructor(private service: MessageService, private router: Router) { }
 
     floatValue: any = null;
 
@@ -80,6 +83,10 @@ export class Message {
     checkboxValue: any[] = [];
 
     switchValue: boolean = false;
+
+    textareaValue: string = '';
+
+    textareaError: boolean = false;
 
     listboxValues: any[] = [
         { name: 'New York', code: 'NY' },
@@ -186,6 +193,12 @@ array1 = [
 
     selectedNode: any = null;
 
+    textareaChange(value:string){
+        if(value !== ''){
+            this.textareaError = false;
+        }
+    }
+
     filterName(event: AutoCompleteCompleteEvent) {
         const filtered: any[] = [];
         const query = event.query;
@@ -238,6 +251,21 @@ array1 = [
     }
 
     showSuccessViaToast() {
-        this.service.add({ severity: 'success', summary: 'Success Message', detail: 'Message sent' });
+        if(this.textareaValue) {
+            this.service.add({ severity: 'success', summary: 'Success Message', detail: 'Message sent' });
+            this.dropdownValue = '';
+            this.autoFilteredValue = [];
+            this.selectedAutoValue = null;
+            this.textareaValue = '';
+        } else {
+            this.textareaError = true;
+        }      
     }
+
+    reloadCurrentRoute() {
+        const currentUrl = this.router.url;
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate([currentUrl]);
+        });
+      }
 }

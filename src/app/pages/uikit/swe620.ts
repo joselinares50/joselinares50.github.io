@@ -55,6 +55,9 @@ import { Router } from '@angular/router';
                     <a [routerLink]="['../timelinepage','swe620']">
                         <p-progressbar [value]="value" [showValue]="true"></p-progressbar>
                     </a>
+                    <div class="flex flex-wrap gap-2 mt-6">
+                        <p-button [routerLink]="['../timelinepage','swe620']" label="View Timeline" />
+                    </div>
                 </div>
             </div>
         </div>
