@@ -66,14 +66,19 @@ import { TooltipModule } from 'primeng/tooltip';
 
             <div class="layout-topbar-menu hidden lg:block">
                 <div class="layout-topbar-menu-content">
-                    <button type="button" class="layout-topbar-action p-disabled" pTooltip="Calendar" tooltipPosition="bottom" [style]="{'pointer-events': 'auto'}">
-                        <i class="pi pi-calendar"></i>
-                        <span>Calendar</span>
-                    </button>
-                    <button type="button" class="layout-topbar-action p-disabled" pTooltip="Messages" tooltipPosition="bottom" [style]="{'pointer-events': 'auto'}">
-                        <i class="pi pi-inbox"></i>
-                        <span>Messages</span>
-                    </button>
+                    <div pTooltip="Calendar" tooltipPosition="bottom">
+                        <button type="button" class="layout-topbar-action p-disabled" pTooltip="Calendar" tooltipPosition="bottom">
+                            <i class="pi pi-calendar"></i>
+                            <span>Calendar</span>
+                        </button>
+                    </div>
+                    <div pTooltip="Messages" tooltipPosition="bottom">
+
+                        <button type="button" class="layout-topbar-action p-disabled" pTooltip="Messages" tooltipPosition="bottom">
+                            <i class="pi pi-inbox"></i>
+                            <span>Messages</span>
+                        </button>
+                    </div>
                     <button type="button" [routerLink]="['/uikit/account']" class="layout-topbar-action" pTooltip="Profile" tooltipPosition="bottom" [style]="{'pointer-events': 'auto'}">
                         <i class="pi pi-user"></i>
                         <span>Profile</span>

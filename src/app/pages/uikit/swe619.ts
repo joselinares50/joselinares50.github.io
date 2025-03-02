@@ -155,7 +155,7 @@ Chapter 6: Iteration Abstraction
                                     <p class="m-0">
                                         Implement a class GrowList that behaves like a simplified mutable list. The GrowList should allow elements to be added but not removed, ensuring immutability of existing elements.
                                     </p>
-                                    <p-button label="Go to Submission Page" rounded />
+                                    <p-button label="Go to Submission Page" [routerLink]="['../submission','swe619']" rounded />
                                 </p-tabpanel>
                                 <p-tabpanel value="2">
                                     <p class="m-0">
