@@ -269,15 +269,17 @@ export class Swe620 {
     ];
     menuItems = [
         {
-            label: 'Quick Links',
+            label: 'Academic Resources',
             items: [
                 {
                     label: 'Contact Instructor',
-                    icon: 'pi pi-fw pi-plus'
+                    icon: 'pi pi-fw pi-plus',
+                    disabled: true
                 },
                 {
                     label: 'Syllabus',
-                    icon: 'pi pi-fw pi-user-edit'
+                    icon: 'pi pi-fw pi-user-edit',
+                    disabled: true
                 },
                 {
                     label: 'Schedule',

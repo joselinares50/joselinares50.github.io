@@ -20,6 +20,7 @@ import { Message } from './message';
 import { Grade } from './grade'
 import { Schedule } from './schedule'
 import { Timeline } from './timeline'
+import { AccountDemo } from './accountdemo';
 
 
 
@@ -45,5 +46,6 @@ export default [
     { path: 'grade/:id', data: { breadcrumb: 'Grade' }, component: Grade },
     { path: 'schedule/:id', data: { breadcrumb: 'Schedule' }, component: Schedule },
     { path: 'timelinepage/:id', data: { breadcrumb: 'Timeline' }, component: Timeline },
+    { path: 'account', data: { breadcrumb: 'Account' }, component: AccountDemo },
     { path: '**', redirectTo: '/notfound' }
 ] as Routes;
