@@ -99,6 +99,7 @@ export class Message {
 
     // Array 1
 array1 = [
+    { name: "John Smith (Instructor)"},
     { name: "Jasmine Jones" },
     { name: "Alice Wilson" },
     { name: "Eva Smith" },
@@ -113,6 +114,7 @@ array1 = [
   
   // Array 2
   array2 = [
+    { name: "Jane Doe (Instructor)"},
     { name: "Hannah Jones" },
     { name: "David Moore" },
     { name: "Alice Moore" },

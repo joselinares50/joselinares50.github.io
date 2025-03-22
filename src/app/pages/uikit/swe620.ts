@@ -75,6 +75,8 @@ import { Router } from '@angular/router';
                 and dynamic modeling using Unified Modeling Language (UML) notation. Students will participate 
                 in a group project focusing on software requirements and specifications using modern methodologies.
             </p>
+            <div class="font-semibold mt-4 mb-4">Instructor Name:</div>
+            <p>Jane Doe</p>
         </section>
 
         <section>
@@ -271,11 +273,6 @@ export class Swe620 {
         {
             label: 'Academic Resources',
             items: [
-                {
-                    label: 'Contact Instructor',
-                    icon: 'pi pi-fw pi-plus',
-                    disabled: true
-                },
                 {
                     label: 'Syllabus',
                     icon: 'pi pi-fw pi-user-edit',

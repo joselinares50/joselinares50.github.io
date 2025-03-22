@@ -71,6 +71,8 @@ import { Router } from '@angular/router';
                             This graduate-level course provides an in-depth exploration of object-oriented software development, focusing on the principles and practices necessary for designing, 
                             specifying, and constructing robust software systems. Students will gain a solid understanding of modern object-oriented programming (OOP) languages and techniques, emphasizing abstraction, modularity, and information hiding.
                             </p>
+                            <div class="font-semibold mt-4 mb-4">Instructor Name:</div>
+                            <p>John Smith</p>
                             <div class="font-semibold mt-4 mb-4">Key Topics Covered:</div>
                             <p>Object-Oriented Design Principles: Abstraction, encapsulation, inheritance, polymorphism, and the Liskov Substitution Principle.</p>
 
@@ -283,11 +285,6 @@ export class Swe619 {
         {
             label: 'Academic Resources',
             items: [
-                {
-                    label: 'Contact Instructor',
-                    icon: 'pi pi-fw pi-plus',
-                    disabled: true
-                },
                 {
                     label: 'Syllabus',
                     icon: 'pi pi-fw pi-user-edit',
