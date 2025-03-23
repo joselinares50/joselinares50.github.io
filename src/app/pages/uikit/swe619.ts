@@ -20,6 +20,9 @@ import { TableModule } from 'primeng/table';
 import { RouterModule } from '@angular/router';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { Router } from '@angular/router';
+import { MeterGroup } from 'primeng/metergroup';
+import { CardModule } from 'primeng/card';
+
 
 
 
@@ -45,16 +48,54 @@ import { Router } from '@angular/router';
         InputIconModule,
         TableModule,
         RouterModule,
-        ProgressBarModule
+        ProgressBarModule,
+        MeterGroup,
+        CardModule
     ],
     template: `
         <div class="card">
-            <div class="font-semibold text-xl mb-4">Course Progress</div>
+            <!-- <div class="font-semibold text-xl mb-4">Course Progress</div> -->
             <div class="flex flex-col md:flex-row gap-4">
                 <div class="md:w-full">
-                    <a [routerLink]="['../timelinepage','swe619']">
+                    <!-- <a [routerLink]="['../timelinepage','swe619']">
                         <p-progressbar [value]="value" [showValue]="true"></p-progressbar>
-                    </a>
+                    </a> -->
+                    <p-metergroup [value]="meterGroup" labelPosition="start">
+                        <ng-template #label>
+                            <div class="flex flex-wrap gap-4">
+                                <ng-container *ngFor="let meterItem of meterGroup; let index = index">
+                                    <p-card class="flex-1" styleClass="border border-surface shadow-none">
+                                        <div class="flex justify-between gap-8">
+                                            <div class="flex flex-col gap-1">
+                                                <span class="text-surface-500 dark:text-surface-400 text-sm">{{ meterItem.label }}</span>
+                                                <span class="font-bold text-lg">{{ meterItem.value }}%</span>
+                                                <span class="font-bold text-lg">({{meterItem.completed}}/{{meterItem.total}}) completed</span>
+                                            </div>
+                                            <span class="w-8 h-8 rounded-full inline-flex justify-center items-center text-center" [style]="{ 'background-color': meterItem.color1, color: '#ffffff' }">
+                                                <i [class]="meterItem.icon"></i>
+                                            </span>
+                                        </div>
+                                    </p-card>
+                                </ng-container>
+                            </div>
+                        </ng-template>
+                        <ng-template #meter let-value let-class="class" let-width="size">
+                            <span [class]="class" [style]="{ background: value.color1, width: width }"></span>
+                        </ng-template>
+                        <ng-template #start let-totalPercent="totalPercent">
+                            <div class="flex justify-between mt-4 mb-2 relative">
+                                <span>Course Progress</span>
+                                <span [style]="{ width: totalPercent + '%' }" class="absolute text-right">{{ totalPercent }}%</span>
+                                <!-- <span class="font-medium">1TB</span> -->
+                            </div>
+                        </ng-template>
+                        <!-- <ng-template #end>
+                            <div class="flex justify-between mt-4">
+                                <p-button label="Manage Storage" [outlined]="true" size="small" />
+                                <p-button label="Update Plan" size="small" />
+                            </div>
+                        </ng-template> -->
+                    </p-metergroup>
                     <div class="flex flex-wrap gap-2 mt-6">
                         <p-button [routerLink]="['../timelinepage','swe619']" label="View Timeline" />
                     </div>
@@ -262,6 +303,13 @@ Chapter 6: Iteration Abstraction
 export class Swe619 {
 
     constructor( private router: Router ) { }
+
+    meterGroup = [
+        { label: 'Discussion', color1: '#34d399', color2: '#fbbf24', value: 5.8, completed: 1, total: 3, icon: 'pi pi-table' },
+        { label: 'Assignment', color1: '#fbbf24', color2: '#60a5fa', value: 17.6,  completed: 3, total: 7, icon: 'pi pi-inbox' },
+        { label: 'Quiz', color1: '#60a5fa', color2: '#c084fc', value: 11.6,  completed: 2, total: 5, icon: 'pi pi-folder' },
+        { label: 'Exam', color1: '#c084fc', color2: '#c084fc', value: 0,  completed: 0, total: 2, icon: 'pi pi-receipt' }
+    ];
 
     items: MenuItem[] = [
         {
