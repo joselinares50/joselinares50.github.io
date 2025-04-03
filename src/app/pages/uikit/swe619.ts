@@ -115,7 +115,7 @@ import { Breadcrumb } from 'primeng/breadcrumb';
                         </ng-template> -->
                     </p-metergroup>
                     <div class="flex flex-wrap gap-2 mt-6">
-                        <p-button [routerLink]="['../timelinepage','swe619']" label="View Timeline" />
+                        <p-button [routerLink]="['../timelinepage','swe619']" label="View Timeline" [link]="true" />
                     </div>
                 </div>
             </div>
@@ -216,13 +216,13 @@ Chapter 6: Iteration Abstraction
                                     <p class="m-0">
                                         Implement a class GrowList that behaves like a simplified mutable list. The GrowList should allow elements to be added but not removed, ensuring immutability of existing elements.
                                     </p>
-                                    <p-button label="Go to Submission Page" [routerLink]="['../submission','swe619']" rounded />
+                                    <p-button label="Go to Submission Page" [routerLink]="['../submission','swe619']" [link]="true" />
                                 </p-tabpanel>
                                 <p-tabpanel value="2">
                                     <p class="m-0">
                                     In this module, we explored how representation invariants (rep-invariants) and abstraction functions help ensure the correctness and maintainability of software systems. These concepts are particularly important when designing complex, mutable data structures.
                                     </p>
-                                    <p-button label="Go to Discussion Board" rounded />
+                                    <p-button label="Go to Discussion Board" [link]="true" />
                                 </p-tabpanel>
                                 <p-tabpanel value="3">
                                 <p class="m-0 font-semibold">Title: Quiz on Data Abstraction and Representation Invariants</p>
@@ -231,7 +231,7 @@ Chapter 6: Iteration Abstraction
                                     
                                     </p>
                                     <p>Answer the following questions based on the concepts covered in Module 2. Be sure to provide clear and concise explanations where required. This quiz is timed (30 minutes) and open notes.</p>
-                                    <p-button label="Go to Quiz" rounded />
+                                    <p-button label="Go to Quiz" [link]="true" />
                                 </p-tabpanel>
                             </p-tabpanels>
                         </p-tabs>
