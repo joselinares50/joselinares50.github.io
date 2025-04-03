@@ -22,6 +22,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { Router } from '@angular/router';
 import { MeterGroup } from 'primeng/metergroup';
 import { CardModule } from 'primeng/card';
+import { Breadcrumb } from 'primeng/breadcrumb';
 
 
 
@@ -49,10 +50,26 @@ import { CardModule } from 'primeng/card';
         RouterModule,
         ProgressBarModule,
         MeterGroup,
-        CardModule
+        CardModule,
+        Breadcrumb
     ],
     template: `
         <div class="card">
+            <p-breadcrumb class="max-w-full" [model]="breadcrumbs">
+                <ng-template #item let-item>
+                    <ng-container *ngIf="item.route; else elseBlock">
+                        <a [routerLink]="item.route" class="p-breadcrumb-item-link">
+                            <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                            <span class="text-primary font-semibold">{{ item.label }}</span>
+                        </a>
+                    </ng-container>
+                    <ng-template #elseBlock>
+                        <a [href]="item.url">
+                            <span class="text-color">{{ item.label }}</span>
+                        </a>
+                    </ng-template>
+                </ng-template>
+            </p-breadcrumb>
             <!-- <div class="font-semibold text-xl mb-4">Course Progress</div> -->
             <div class="flex flex-col md:flex-row gap-4">
                 <div class="md:w-full">
@@ -291,6 +308,8 @@ export class Swe620 {
 
     constructor( private router: Router ) { }
 
+    breadcrumbs: MenuItem[] | undefined;
+
     meterGroup = [
         { label: 'Discussion', color1: '#34d399', color2: '#fbbf24', value: 5.8, completed: 1, total: 3, icon: 'pi pi-table' },
         { label: 'Assignment', color1: '#fbbf24', color2: '#60a5fa', value: 17.6,  completed: 3, total: 7, icon: 'pi pi-inbox' },
@@ -381,6 +400,8 @@ export class Swe620 {
                 clearInterval(this.interval);
             }
         }, 500);
+
+        this.breadcrumbs = [{ icon: 'pi pi-home', route: '/' }, { label: 'swe620' ,  route: '../swe620'}];
     }
 
     ngOnDestroy() {

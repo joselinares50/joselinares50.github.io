@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AccordionModule } from 'primeng/accordion';
 import { MenuItem } from 'primeng/api';
@@ -22,6 +22,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { Router } from '@angular/router';
 import { MeterGroup } from 'primeng/metergroup';
 import { CardModule } from 'primeng/card';
+import { Breadcrumb } from 'primeng/breadcrumb';
+
 
 
 
@@ -50,11 +52,27 @@ import { CardModule } from 'primeng/card';
         RouterModule,
         ProgressBarModule,
         MeterGroup,
-        CardModule
+        CardModule,
+        Breadcrumb
     ],
     template: `
         <div class="card">
             <!-- <div class="font-semibold text-xl mb-4">Course Progress</div> -->
+            <p-breadcrumb class="max-w-full" [model]="breadcrumbs">
+                <ng-template #item let-item>
+                    <ng-container *ngIf="item.route; else elseBlock">
+                        <a [routerLink]="item.route" class="p-breadcrumb-item-link">
+                            <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                            <span class="text-primary font-semibold">{{ item.label }}</span>
+                        </a>
+                    </ng-container>
+                    <ng-template #elseBlock>
+                        <a [href]="item.url">
+                            <span class="text-color">{{ item.label }}</span>
+                        </a>
+                    </ng-template>
+                </ng-template>
+            </p-breadcrumb>
             <div class="flex flex-col md:flex-row gap-4">
                 <div class="md:w-full">
                     <!-- <a [routerLink]="['../timelinepage','swe619']">
@@ -300,9 +318,11 @@ Chapter 6: Iteration Abstraction
         </div>
     `
 })
-export class Swe619 {
+export class Swe619 implements OnInit{
 
     constructor( private router: Router ) { }
+
+    breadcrumbs: MenuItem[] | undefined;
 
     meterGroup = [
         { label: 'Discussion', color1: '#34d399', color2: '#fbbf24', value: 5.8, completed: 1, total: 3, icon: 'pi pi-table' },
@@ -394,6 +414,7 @@ export class Swe619 {
                 clearInterval(this.interval);
             }
         }, 500);
+        this.breadcrumbs = [{ icon: 'pi pi-home', route: '/' }, { label: 'swe619' ,  route: '../swe619'}];
     }
 
     ngOnDestroy() {

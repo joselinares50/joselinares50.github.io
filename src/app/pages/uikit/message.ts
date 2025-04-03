@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageService, ToastMessageOptions } from 'primeng/api';
+import { MessageService, ToastMessageOptions, ConfirmationService } from 'primeng/api';
 import { FluidModule } from 'primeng/fluid';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -11,12 +11,14 @@ import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocompl
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { Router } from '@angular/router';
+import { ConfirmDialog } from 'primeng/confirmdialog';
+
 
 
 @Component({
     selector: 'message',
     standalone: true,
-    imports: [InputTextModule, FluidModule, ButtonModule, SelectModule, FormsModule, TextareaModule, AutoCompleteModule, CommonModule, MessageModule, ToastModule],
+    imports: [InputTextModule, FluidModule, ButtonModule, SelectModule, FormsModule, TextareaModule, AutoCompleteModule, CommonModule, MessageModule, ToastModule, ConfirmDialog],
     template: `<p-fluid>
         <div class="flex mt-8">
             <div class="card flex flex-col gap-6 w-full">
@@ -25,11 +27,13 @@ import { Router } from '@angular/router';
                 <p-select [(ngModel)]="dropdownValue" [options]="dropdownValues" optionLabel="name" placeholder="Select a Course" (change)="onSelected(dropdownValue.value)"/>
                 <div *ngIf="dropdownValue?.code == 'swe619'">
                     <label for="multiple-ac-1" class="font-bold mb-2 block">User</label>
-                    <p-autocomplete [(ngModel)]="selectedAutoValue" [suggestions]="autoFilteredValue" optionLabel="name" placeholder="Search" dropdown multiple display="chip" (completeMethod)="filterName($event)" />
+                    <p-autocomplete [(ngModel)]="selectedAutoValue" [suggestions]="autoFilteredValue" (ngModelChange)="userChange($event)" optionLabel="name" placeholder="Search" dropdown multiple display="chip" (completeMethod)="filterName($event)" class="{{ userError == true ? 'ng-invalid ng-dirty': ''}}" />
+                    <p-message *ngIf="userError" severity="error" variant="simple" size="small">User cannot be empty. You must select a user in order to send.</p-message>
                 </div>
                 <div *ngIf="dropdownValue?.code == 'swe620'">
                     <label for="multiple-ac-1" class="font-bold mb-2 block">User</label>
-                    <p-autocomplete [(ngModel)]="selectedAutoValue" [suggestions]="autoFilteredValue" optionLabel="name" placeholder="Search" dropdown multiple display="chip" (completeMethod)="filterName($event)" />
+                    <p-autocomplete [(ngModel)]="selectedAutoValue" [suggestions]="autoFilteredValue" (ngModelChange)="userChange($event)" optionLabel="name" placeholder="Search" dropdown multiple display="chip" (completeMethod)="filterName($event)" class="{{ userError == true ? 'ng-invalid ng-dirty': ''}}"/>
+                    <p-message *ngIf="userError" severity="error" variant="simple" size="small">User cannot be empty. You must select a user in order to send.</p-message>
                 </div>
                 <div *ngIf="dropdownValue?.code == 'swe625'">
                     <label for="multiple-ac-1" class="font-bold mb-2 block">User</label>
@@ -46,19 +50,20 @@ import { Router } from '@angular/router';
                 </div>
 
                 <div class="flex flex-wrap gap-2">
-                    <p-button (click)="showSuccessViaToast()" label="Send" severity="success" />
+                    <p-button (click)="showSuccessViaToast($event)" label="Send" severity="success" />
                     <p-toast />
                 </div>
             </div>
         </div>
+        <p-confirmdialog />
     </p-fluid>`,
-    providers: [MessageService]
+    providers: [MessageService, ConfirmationService]
 })
 export class Message {
 
     msgs: ToastMessageOptions[] | null = [];
 
-    constructor(private service: MessageService, private router: Router) { }
+    constructor(private service: MessageService, private router: Router, private confirmationService: ConfirmationService) { }
 
     floatValue: any = null;
 
@@ -87,6 +92,39 @@ export class Message {
     textareaValue: string = '';
 
     textareaError: boolean = false;
+
+    userError: boolean = false;
+
+    confirm1(event: Event) {
+        this.confirmationService.confirm({
+            target: event.target as EventTarget,
+            message: 'Are you sure that you want to proceed?',
+            header: 'Confirmation',
+            closable: true,
+            closeOnEscape: true,
+            icon: 'pi pi-exclamation-triangle',
+            rejectButtonProps: {
+                label: 'Cancel',
+                severity: 'secondary',
+                outlined: true,
+            },
+            acceptButtonProps: {
+                label: 'Save',
+            },
+            accept: () => {
+                this.service.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+            },
+            reject: () => {
+                this.service.add({
+                    severity: 'error',
+                    summary: 'Rejected',
+                    detail: 'You have rejected',
+                    life: 3000,
+                });
+            },
+        });
+    }
+    
 
     listboxValues: any[] = [
         { name: 'New York', code: 'NY' },
@@ -201,6 +239,13 @@ array1 = [
         }
     }
 
+    userChange(value:string){
+        console.log(value);
+        if(value !== ''){
+            this.userError = false;
+        }
+    }
+
     filterName(event: AutoCompleteCompleteEvent) {
         const filtered: any[] = [];
         const query = event.query;
@@ -252,16 +297,49 @@ array1 = [
         this.service.add({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
     }
 
-    showSuccessViaToast() {
-        if(this.textareaValue) {
-            this.service.add({ severity: 'success', summary: 'Success Message', detail: 'Message sent' });
-            this.dropdownValue = '';
-            this.autoFilteredValue = [];
-            this.selectedAutoValue = null;
-            this.textareaValue = '';
-        } else {
+    showSuccessViaToast(event: Event) {
+        if (this.textareaValue === ''){
             this.textareaError = true;
-        }      
+        }
+        if (this.selectedAutoValue?.length == 0 || this.selectedAutoValue == null){
+            this.userError = true;
+        }
+        console.log(this.selectedAutoValue);
+        if(this.textareaValue && this.autoFilteredValue) {
+            this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: 'Are you sure you want to send this message?',
+                header: 'Send Message?',
+                closable: true,
+                closeOnEscape: true,
+                icon: 'pi pi-exclamation-triangle',
+                rejectButtonProps: {
+                    label: 'Cancel',
+                    severity: 'secondary',
+                    outlined: true,
+                },
+                acceptButtonProps: {
+                    label: 'Send',
+                },
+                accept: () => {
+                    this.service.add({ severity: 'success', summary: 'Success Message', detail: 'Message Sent' });
+                    this.dropdownValue = '';
+                    this.autoFilteredValue = [];
+                    this.selectedAutoValue = null;
+                    this.textareaValue = '';
+                },
+                reject: () => {
+                    this.service.add({
+                        severity: 'info',
+                        summary: 'Message Canceled',
+                        detail: 'Message Send Canceled',
+                        life: 3000,
+                    });
+                },
+            });
+            //this.service.add({ severity: 'success', summary: 'Success Message', detail: 'Message sent' });
+            
+        }  
     }
 
     reloadCurrentRoute() {

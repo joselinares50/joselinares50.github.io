@@ -18,6 +18,11 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
 import { Customer, CustomerService, Representative } from '../service/customer.service';
 import { Product, ProductService } from '../service/product.service';
+import { Breadcrumb } from 'primeng/breadcrumb';
+import { MenuItem } from 'primeng/api';
+import { RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+
 
 interface expandedRows {
     [key: string]: boolean;
@@ -42,9 +47,26 @@ interface expandedRows {
         ButtonModule,
         RatingModule,
         RippleModule,
-        IconFieldModule
+        IconFieldModule,
+        Breadcrumb, 
+        RouterModule
     ],
     template: ` <div class="card">
+        <p-breadcrumb class="max-w-full" [model]="breadcrumbs">
+                <ng-template #item let-item>
+                    <ng-container *ngIf="item.route; else elseBlock">
+                        <a [routerLink]="item.route" class="p-breadcrumb-item-link">
+                            <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                            <span class="text-primary font-semibold">{{ item.label }}</span>
+                        </a>
+                    </ng-container>
+                    <ng-template #elseBlock>
+                        <a [href]="item.url">
+                            <span class="text-color">{{ item.label }}</span>
+                        </a>
+                    </ng-template>
+                </ng-template>
+            </p-breadcrumb>
         <div class="card">
             <div class="font-semibold text-xl mb-4">Schedule</div>
             <p-select [options]="category" [(ngModel)]="selectedCategory" optionLabel="name" placeholder="Select a Category" class="w-full md:w-56" />
@@ -84,6 +106,11 @@ interface expandedRows {
     providers: [ConfirmationService, MessageService, CustomerService, ProductService]
 })
 export class Schedule implements OnInit {
+
+    id: any = '';
+
+    breadcrumbs: MenuItem[] | undefined;
+
     customers1: Customer[] = [];
 
     customers2: Customer[] = [];
@@ -116,7 +143,8 @@ export class Schedule implements OnInit {
 
     constructor(
         private customerService: CustomerService,
-        private productService: ProductService
+        private productService: ProductService,
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit() {
@@ -130,6 +158,10 @@ export class Schedule implements OnInit {
         this.customerService.getCustomersMedium().then((customers) => (this.customers2 = customers));
         this.customerService.getCustomersLarge().then((customers) => (this.customers3 = customers));
         this.productService.getProductsWithOrdersSmall().then((data) => (this.products = data));
+
+        this.id = this.route.snapshot.paramMap.get('id');
+
+        this.breadcrumbs = [{ icon: 'pi pi-home', route: '/' }, { label: this.id,  route: '/uikit/' + this.id}, { label: 'Schedule', route: '../' + this.id}];
 
         this.representatives = [
             { name: 'Amy Elsner', image: 'amyelsner.png' },

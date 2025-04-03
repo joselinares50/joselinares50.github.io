@@ -18,6 +18,9 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
 import { Product, ProductService } from '../service/product.service';
 import { ActivatedRoute } from '@angular/router';
+import { Breadcrumb } from 'primeng/breadcrumb';
+import { MenuItem } from 'primeng/api';
+import { RouterModule } from '@angular/router';
 
 interface expandedRows {
     [key: string]: boolean;
@@ -42,11 +45,28 @@ interface expandedRows {
         ButtonModule,
         RatingModule,
         RippleModule,
-        IconFieldModule
+        IconFieldModule,
+        Breadcrumb, 
+        RouterModule
     ],
     template: `
 
         <div class="card">
+            <p-breadcrumb class="max-w-full" [model]="breadcrumbs">
+                <ng-template #item let-item>
+                    <ng-container *ngIf="item.route; else elseBlock">
+                        <a [routerLink]="item.route" class="p-breadcrumb-item-link">
+                            <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+                            <span class="text-primary font-semibold">{{ item.label }}</span>
+                        </a>
+                    </ng-container>
+                    <ng-template #elseBlock>
+                        <a [href]="item.url">
+                            <span class="text-color">{{ item.label }}</span>
+                        </a>
+                    </ng-template>
+                </ng-template>
+            </p-breadcrumb>
             <div class="font-semibold text-xl mb-4">Grades</div>
             <p-table [value]="grouping" sortField="category" sortMode="single" [scrollable]="true" scrollHeight="1000px" rowGroupMode="subheader" groupRowsBy="category" [tableStyle]="{ 'min-width': '60rem' , 'min-height': '30rem'}">
                 <ng-template #header>
@@ -106,6 +126,8 @@ interface expandedRows {
 })
 export class Grade implements OnInit {
 
+    breadcrumbs: MenuItem[] | undefined;
+
     id: any = '';
     
     customers1: any[] = [];
@@ -149,6 +171,8 @@ export class Grade implements OnInit {
         this.productService.getProductsWithOrdersSmall().then((data) => (this.products = data));
 
         this.id = this.route.snapshot.paramMap.get('id');
+
+        this.breadcrumbs = [{ icon: 'pi pi-home', route: '/' }, { label: this.id,  route: '/uikit/' + this.id}, { label: 'Grades', route: '../' + this.id}];
 
         this.statuses = [
             { label: 'Unqualified', value: 'unqualified' },
