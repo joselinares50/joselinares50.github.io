@@ -69,7 +69,7 @@ interface expandedRows {
             </p-breadcrumb>
         <div class="card">
             <div class="font-semibold text-xl mb-4">Schedule</div>
-            <p-select [options]="category" [(ngModel)]="selectedCategory" optionLabel="name" placeholder="Select a Category" class="w-full md:w-56" />
+            <p-select [options]="category" [(ngModel)]="selectedCategory" optionLabel="name" placeholder="Select a Category" [showClear]="true" class="w-full md:w-56" />
             <p-table [value]="filteredAssignments" [tableStyle]="{ 'min-width': '50rem' }">
                 <ng-template #header>
                     <tr>
@@ -307,7 +307,7 @@ export class Schedule implements OnInit {
   ]
 
   // Selected filter for assignment category
-  selectedCategory: any = '';
+  selectedCategory: any = undefined;
 
   // Filtered assignments based on the selected category
   get filteredAssignments() {

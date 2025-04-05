@@ -24,7 +24,8 @@ import { ConfirmDialog } from 'primeng/confirmdialog';
             <div class="card flex flex-col gap-6 w-full">
                 <div class="font-semibold text-xl">Message a User</div>
                 <div class="font-semibold text-xl">Select</div>
-                <p-select [(ngModel)]="dropdownValue" [options]="dropdownValues" optionLabel="name" placeholder="Select a Course" (change)="onSelected(dropdownValue.value)"/>
+                <p-select [(ngModel)]="dropdownValue" [options]="dropdownValues" optionLabel="name" placeholder="Select a Course" (ngModelChange)="onSelected(dropdownValue.value)" [showClear]="true" class="{{ courseError == true ? 'ng-invalid ng-dirty': ''}}"/>
+                <p-message *ngIf="courseError" severity="error" variant="simple" size="small">Select a course to continue</p-message>
                 <div *ngIf="dropdownValue?.code == 'swe619'">
                     <label for="multiple-ac-1" class="font-bold mb-2 block">User</label>
                     <p-autocomplete [(ngModel)]="selectedAutoValue" [suggestions]="autoFilteredValue" (ngModelChange)="userChange($event)" optionLabel="name" placeholder="Search" dropdown multiple display="chip" (completeMethod)="filterName($event)" class="{{ userError == true ? 'ng-invalid ng-dirty': ''}}" />
@@ -94,6 +95,8 @@ export class Message {
     textareaError: boolean = false;
 
     userError: boolean = false;
+
+    courseError: boolean = false;
 
     confirm1(event: Event) {
         this.confirmationService.confirm({
@@ -283,6 +286,7 @@ array1 = [
 
     onSelected(value: string): void {
         this.selectedTeam = value;
+        this.courseError = false;
     }
 
     showInfoViaToast() {
@@ -303,6 +307,9 @@ array1 = [
         }
         if (this.selectedAutoValue?.length == 0 || this.selectedAutoValue == null){
             this.userError = true;
+        }
+        if(!this.dropdownValue) {
+            this.courseError = true;
         }
         console.log(this.selectedAutoValue);
         if(this.textareaValue && this.autoFilteredValue) {
