@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener  } from '@angular/core';
 import { MessageService, ToastMessageOptions, ConfirmationService } from 'primeng/api';
 import { FluidModule } from 'primeng/fluid';
 import { InputTextModule } from 'primeng/inputtext';
@@ -12,6 +12,8 @@ import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { Router } from '@angular/router';
 import { ConfirmDialog } from 'primeng/confirmdialog';
+import { ComponentCanDeactivate, PendingChangesGuard } from '../service/unsavedChangesGuard.service';
+import { Observable } from 'rxjs';
 
 
 
@@ -58,9 +60,9 @@ import { ConfirmDialog } from 'primeng/confirmdialog';
         </div>
         <p-confirmdialog />
     </p-fluid>`,
-    providers: [MessageService, ConfirmationService]
+    providers: [MessageService, ConfirmationService, PendingChangesGuard ]
 })
-export class Message {
+export class Message implements ComponentCanDeactivate {
 
     msgs: ToastMessageOptions[] | null = [];
 
@@ -354,5 +356,22 @@ array1 = [
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate([currentUrl]);
         });
+      }
+
+      @HostListener('window:beforeunload')
+      canDeactivate(): Observable<boolean> | boolean {
+        // insert logic to check if there are pending changes here;
+        // returning true will navigate without confirmation
+        // returning false will show a confirm dialog before navigating away
+        let value: boolean = true;
+        console.log(value);
+        console.log(this.autoFilteredValue);
+        console.log(this.textareaValue);
+        console.log(this.dropdownValue);
+
+        if(this.selectedAutoValue || this.textareaValue || this.dropdownValue){
+            value = false;
+        }
+        return value;
       }
 }

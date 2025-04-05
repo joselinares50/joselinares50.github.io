@@ -22,6 +22,8 @@ import { Schedule } from './schedule'
 import { Timeline } from './timeline'
 import { AccountDemo } from './accountdemo';
 import { File } from './file';
+import { PendingChangesGuard   } from '../service/unsavedChangesGuard.service';
+
 
 
 
@@ -33,7 +35,7 @@ export default [
     { path: 'input', data: { breadcrumb: 'Input' }, component: InputDemo },
     { path: 'list', data: { breadcrumb: 'List' }, component: ListDemo },
     { path: 'media', data: { breadcrumb: 'Media' }, component: MediaDemo },
-    { path: 'message', data: { breadcrumb: 'Message' }, component: MessagesDemo },
+    { path: 'message', data: { breadcrumb: 'Message' }, component: MessagesDemo, canDeactivate: [PendingChangesGuard ]},
     { path: 'misc', data: { breadcrumb: 'Misc' }, component: MiscDemo },
     { path: 'panel', data: { breadcrumb: 'Panel' }, component: PanelsDemo },
     { path: 'timeline', data: { breadcrumb: 'Timeline' }, component: TimelineDemo },
