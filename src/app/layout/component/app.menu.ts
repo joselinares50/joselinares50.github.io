@@ -11,7 +11,7 @@ import { AppMenuitem } from './app.menuitem';
     template: `<ul class="layout-menu">
         <ng-container *ngFor="let item of model; let i = index">
             <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
-            <li *ngIf="item.separator" class="menu-separator"></li>
+            <li *ngIf="item.separator" class="menu-separator pt-8"></li>
         </ng-container>
     </ul> `
 })
@@ -32,6 +32,9 @@ export class AppMenu {
                     // { label: 'SWE 625: Software Project Management', icon: 'pi pi-fw pi-folder', routerLink: ['/uikit/formlayout'] },
                     // { label: 'SWE 637: Software Testing', icon: 'pi pi-fw pi-folder', routerLink: ['/uikit/formlayout'] }
                 ]
+            },
+            {
+                separator: true
             },
             {
                 label: 'Tools',
