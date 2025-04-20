@@ -67,7 +67,7 @@ interface expandedRows {
                     </ng-template>
                 </ng-template>
             </p-breadcrumb>
-        <div class="card">
+        <div class="mt-8">
             <div class="font-semibold text-xl mb-4">Schedule</div>
             <p-select [options]="category" [(ngModel)]="selectedCategory" optionLabel="name" placeholder="Select a Category" [showClear]="true" class="w-full md:w-56" />
             <p-table [value]="filteredAssignments" [tableStyle]="{ 'min-width': '50rem' }">

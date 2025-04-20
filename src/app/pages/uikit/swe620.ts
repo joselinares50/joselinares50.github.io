@@ -71,7 +71,7 @@ import { Breadcrumb } from 'primeng/breadcrumb';
                 </ng-template>
             </p-breadcrumb>
             <!-- <div class="font-semibold text-xl mb-4">Course Progress</div> -->
-            <div class="flex flex-col md:flex-row gap-4">
+            <div class="flex flex-col md:flex-row gap-4 mt-8">
                 <div class="md:w-full">
                     <!-- <a [routerLink]="['../timelinepage','swe620']">
                         <p-progressbar [value]="value" [showValue]="true"></p-progressbar>

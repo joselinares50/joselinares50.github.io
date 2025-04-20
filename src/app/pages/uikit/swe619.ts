@@ -73,7 +73,7 @@ import { Breadcrumb } from 'primeng/breadcrumb';
                     </ng-template>
                 </ng-template>
             </p-breadcrumb>
-            <div class="flex flex-col md:flex-row gap-4">
+            <div class="flex flex-col md:flex-row gap-4 mt-8">
                 <div class="md:w-full">
                     <!-- <a [routerLink]="['../timelinepage','swe619']">
                         <p-progressbar [value]="value" [showValue]="true"></p-progressbar>
@@ -114,8 +114,10 @@ import { Breadcrumb } from 'primeng/breadcrumb';
                             </div>
                         </ng-template> -->
                     </p-metergroup>
-                    <div class="flex flex-wrap gap-2 mt-6">
-                        <p-button [routerLink]="['../timelinepage','swe619']" label="View Timeline" [link]="true" />
+                    <div class="gap-2 mt-6">
+                        <div style="justify-content: center" class="flex">
+                            <p-button [routerLink]="['../timelinepage','swe619']" label="View Timeline" [link]="true" />
+                        </div>
                     </div>
                 </div>
             </div>

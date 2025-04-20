@@ -32,7 +32,7 @@ import { RouterModule } from '@angular/router';
                     </ng-template>
                 </ng-template>
             </p-breadcrumb>
-                <div class="font-semibold text-xl mb-4">Timeline</div>
+                <div class="font-semibold text-xl mb-4 mt-8">Timeline</div>
                 <p-timeline [value]="events1" align="alternate" styleClass="customized-timeline">
                     <ng-template #marker let-event>
                         <span class="flex w-8 h-8 items-center justify-center text-white rounded-full z-10 shadow-sm" [style]="{ 'background-color': event.color }">
