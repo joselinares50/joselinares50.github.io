@@ -25,29 +25,28 @@ import { Observable } from 'rxjs';
         <div class="flex mt-8">
             <div class="card flex flex-col gap-6 w-full">
                 <div class="font-semibold text-xl">Message a User</div>
-                <div class="font-semibold text-xl">Select</div>
                 <p-select [(ngModel)]="dropdownValue" [options]="dropdownValues" optionLabel="name" placeholder="Select a Course" (ngModelChange)="onSelected(dropdownValue.value)" [showClear]="true" class="{{ courseError == true ? 'ng-invalid ng-dirty': ''}}"/>
                 <p-message *ngIf="courseError" severity="error" variant="simple" size="small">Select a course to continue</p-message>
                 <div *ngIf="dropdownValue?.code == 'swe619'">
-                    <label for="multiple-ac-1" class="font-bold mb-2 block">User</label>
+                    <label for="multiple-ac-1" class="font-medium text-lg block">User</label>
                     <p-autocomplete [(ngModel)]="selectedAutoValue" [suggestions]="autoFilteredValue" (ngModelChange)="userChange($event)" optionLabel="name" placeholder="Search" dropdown multiple display="chip" (completeMethod)="filterName($event)" class="{{ userError == true ? 'ng-invalid ng-dirty': ''}}" />
                     <p-message *ngIf="userError" severity="error" variant="simple" size="small">User cannot be empty. You must select a user in order to send.</p-message>
                 </div>
                 <div *ngIf="dropdownValue?.code == 'swe620'">
-                    <label for="multiple-ac-1" class="font-bold mb-2 block">User</label>
+                    <label for="multiple-ac-1" class="font-medium text-lg block">User</label>
                     <p-autocomplete [(ngModel)]="selectedAutoValue" [suggestions]="autoFilteredValue" (ngModelChange)="userChange($event)" optionLabel="name" placeholder="Search" dropdown multiple display="chip" (completeMethod)="filterName($event)" class="{{ userError == true ? 'ng-invalid ng-dirty': ''}}"/>
                     <p-message *ngIf="userError" severity="error" variant="simple" size="small">User cannot be empty. You must select a user in order to send.</p-message>
                 </div>
                 <div *ngIf="dropdownValue?.code == 'swe625'">
-                    <label for="multiple-ac-1" class="font-bold mb-2 block">User</label>
+                    <label for="multiple-ac-1" class="font-medium text-lg block">User</label>
                     <p-autocomplete [(ngModel)]="selectedAutoValue" [suggestions]="autoFilteredValue" optionLabel="name" placeholder="Search" dropdown multiple display="chip" (completeMethod)="filterName($event)" />
                 </div>
                 <div *ngIf="dropdownValue?.code == 'swe637'">
-                    <label for="multiple-ac-1" class="font-bold mb-2 block">User</label>
+                    <label for="multiple-ac-1" class="font-medium text-lg block">User</label>
                     <p-autocomplete [(ngModel)]="selectedAutoValue" [suggestions]="autoFilteredValue" optionLabel="name" placeholder="Search" dropdown multiple display="chip" (completeMethod)="filterName($event)" />
                 </div>
                 <div *ngIf="autoFilteredValue.length" class="flex flex-wrap">
-                    <label for="message">Message</label>
+                    <label for="message" class="font-medium text-lg">Message</label>
                     <textarea pTextarea id="message" rows="4" [(ngModel)]="textareaValue" (ngModelChange)="textareaChange($event)" class="{{ textareaError == true ? 'ng-invalid ng-dirty': ''}}"></textarea>
                     <p-message *ngIf="textareaError" severity="error" variant="simple" size="small">Message cannot be empty. Provide a message in order to send.</p-message>
                 </div>
