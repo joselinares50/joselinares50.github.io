@@ -87,7 +87,7 @@ import { Breadcrumb } from 'primeng/breadcrumb';
                                             <div class="flex flex-col gap-1">
                                                 <span class="text-surface-500 dark:text-surface-400 text-sm">{{ meterItem.label }}</span>
                                                 <span class="font-bold text-lg">{{ meterItem.value }}%</span>
-                                                <span class="font-bold text-lg">({{meterItem.completed}}/{{meterItem.total}}) completed</span>
+                                                <span class="text-sm">({{meterItem.completed}}/{{meterItem.total}}) completed</span>
                                             </div>
                                             <span class="w-8 h-8 rounded-full inline-flex justify-center items-center text-center" [style]="{ 'background-color': meterItem.color1, color: '#ffffff' }">
                                                 <i [class]="meterItem.icon"></i>

@@ -85,7 +85,7 @@ import { Breadcrumb } from 'primeng/breadcrumb';
                                             <div class="flex flex-col gap-1">
                                                 <span class="text-surface-500 dark:text-surface-400 text-sm">{{ meterItem.label }}</span>
                                                 <span class="font-bold text-lg">{{ meterItem.value }}%</span>
-                                                <span class="font-bold text-lg">({{meterItem.completed}}/{{meterItem.total}}) completed</span>
+                                                <span class="text-sm">({{meterItem.completed}}/{{meterItem.total}}) completed</span>
                                             </div>
                                             <span class="w-8 h-8 rounded-full inline-flex justify-center items-center text-center" [style]="{ 'background-color': meterItem.color1, color: '#ffffff' }">
                                                 <i [class]="meterItem.icon"></i>
@@ -112,8 +112,10 @@ import { Breadcrumb } from 'primeng/breadcrumb';
                             </div>
                         </ng-template> -->
                     </p-metergroup>
-                    <div class="flex flex-wrap gap-2 mt-6">
-                        <p-button [routerLink]="['../timelinepage','swe620']" label="View Timeline" [link]="true" />
+                    <div class="gap-2 mt-6">
+                        <div style="justify-content: center" class="flex">
+                            <p-button [routerLink]="['../timelinepage','swe620']" label="View Timeline" [link]="true" />
+                        </div>
                     </div>
                 </div>
             </div>
