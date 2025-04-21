@@ -127,7 +127,8 @@ import { Breadcrumb } from 'primeng/breadcrumb';
                 <div class="md:w-3/4 mt-6 md:mt-0">
                     <div class="card">
                         <div class="font-semibold text-xl mb-4">SWE 619: Object-Oriented Software Specification and Construction</div>
-                        <p-panel header="Summary" [toggleable]="false">
+                        <p-panel header="Summary:" [toggleable]="false">
+                            
                             <p class="m-0">
                             This graduate-level course provides an in-depth exploration of object-oriented software development, focusing on the principles and practices necessary for designing, 
                             specifying, and constructing robust software systems. Students will gain a solid understanding of modern object-oriented programming (OOP) languages and techniques, emphasizing abstraction, modularity, and information hiding.
@@ -135,15 +136,16 @@ import { Breadcrumb } from 'primeng/breadcrumb';
                             <div class="font-semibold mt-4 mb-4">Instructor Name:</div>
                             <p>John Smith</p>
                             <div class="font-semibold mt-4 mb-4">Key Topics Covered:</div>
-                            <p>Object-Oriented Design Principles: Abstraction, encapsulation, inheritance, polymorphism, and the Liskov Substitution Principle.</p>
 
-                            <p><b>Specifications and Testing:</b> Development of precise specifications for functions and data types, black-box testing techniques, debugging strategies, and formal methods (e.g., assertions, invariants, pre/post-conditions).</p>
+                            <div class="font-bold underline">1. Object-Oriented Design Principles:</div><p> Abstraction, encapsulation, inheritance, polymorphism, and the Liskov Substitution Principle.</p>
 
-                            <p><b>Design Patterns:</b> Application of common design patterns to enhance software structure and maintainability.</p>
+                            <div class="font-bold underline">2. Specifications and Testing:</div> <p>Development of precise specifications for functions and data types, black-box testing techniques, debugging strategies, and formal methods (e.g., assertions, invariants, pre/post-conditions).</p>
 
-                            <p><b>Concurrent Programming:</b> Introduction to multithreading, synchronization mechanisms, and locks for parallel computing.</p>
+                            <div class="font-bold underline">3. Design Patterns:</div><p> Application of common design patterns to enhance software structure and maintainability.</p>
 
-                            <p><b>Software Verification:</b> Use of formal verification techniques such as Hoare logic to ensure program correctness.</p>
+                            <div class="font-bold underline">4. Concurrent Programming:</div><p> Introduction to multithreading, synchronization mechanisms, and locks for parallel computing.</p>
+
+                            <div class="font-bold underline">5. Software Verification:</div><p> Use of formal verification techniques such as Hoare logic to ensure program correctness.</p>
 
                             <div class="font-semibold mt-4 mb-4">Learning Outcomes:</div>
                             By the end of the course, students will be able to:
