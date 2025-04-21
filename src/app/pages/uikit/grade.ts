@@ -68,7 +68,7 @@ interface expandedRows {
                 </ng-template>
             </p-breadcrumb>
             <div class="font-semibold text-xl mb-4 mt-8">Grades</div>
-            <p-table [value]="grouping" sortField="category" sortMode="single" [scrollable]="true" scrollHeight="1000px" rowGroupMode="subheader" groupRowsBy="category" [tableStyle]="{ 'min-width': '60rem' , 'min-height': '30rem'}">
+            <p-table [value]="grouping" showGridlines sortField="category" sortMode="single" [scrollable]="true" scrollHeight="1000px" rowGroupMode="subheader" groupRowsBy="category" [tableStyle]="{ 'min-width': '60rem' , 'min-height': '30rem'}">
                 <ng-template #header>
                     <tr>
                         <th>Category</th>
