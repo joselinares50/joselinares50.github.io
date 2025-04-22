@@ -3,3 +3,7 @@
 @use './assets/layout/layout.scss';
 @use 'primeicons/primeicons.css';
 @use './assets/demo/demo.scss';
+
+.p-card {
+    --p-card-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1), 0 1px 8px -1px rgba(0, 0, 0, 0.1);
+}

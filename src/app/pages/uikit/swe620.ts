@@ -174,7 +174,7 @@ import { Breadcrumb } from 'primeng/breadcrumb';
             <div class="flex flex-col md:flex-row gap-8 mt-8">
                 <div class="md:w-3/4 mt-6 md:mt-0">
                     <div class="card">
-                    <div class="font-semibold text-xl mb-4">Current Module: Module 4 (02/18/2025-02/25/2025)</div>
+                    <span class="font-semibold text-xl mb-4">Current Module: Module 4 <span class="font-normal text-base" style="color: #878383">(02/18/2025-02/25/2025)</span></span>
                         <p-tabs value="0">
                             <p-tablist>
                                 <p-tab value="0">Readings</p-tab>
